@@ -2,6 +2,7 @@ package com.game.entity;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -90,10 +91,6 @@ public class Player {
         this.level = level;
     }
 
-    public Integer getUntilNextLevel() {
-        return untilNextLevel;
-    }
-
     public void setUntilNextLevel(Integer untilNextLevel) {
         this.untilNextLevel = untilNextLevel;
     }
@@ -112,5 +109,36 @@ public class Player {
 
     public void setBanned(Boolean banned) {
         this.banned = banned;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Player player = (Player) o;
+        return id.equals(player.id) &&
+                name.equals(player.name) &&
+                title.equals(player.title) &&
+                race == player.race &&
+                profession == player.profession &&
+                experience.equals(player.experience) &&
+                level.equals(player.level) &&
+                untilNextLevel.equals(player.untilNextLevel) &&
+                birthday.equals(player.birthday) &&
+                banned.equals(player.banned);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id,
+                name,
+                title,
+                race,
+                profession,
+                experience,
+                level,
+                untilNextLevel,
+                birthday,
+                banned);
     }
 }
